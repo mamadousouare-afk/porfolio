@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Portfolio</title>
+
+    <!-- Boxicons -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <!-- Logo avec bon lien -->
+    <a href="index.html" class="logo">Portfolio.</a>
+
+    <nav id="navbar">
+        <a href="index.html">Accueil</a>
+        <a href="services.html">Services</a>
+        <a href="projects.html">Projets</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+
+    <div class="menu-icon" id="menu-icon">
+        <i class='bx bx-menu'></i>
+    </div>
+</header>
+
+<main>
+    <section class="home" id="home">
+        <div class="home-content">
+            <h3>Salut, c'est moi</h3>
+            <h1>Souare</h1>
+
+            <div class="typing-text">
+                Je suis un <span id="typing"></span>
+            </div>
+
+            <p>
+                Passionné par le développement web et le design,
+                je crée des expériences numériques modernes et performantes.
+            </p>
+            
+            <div class="social-icons">
+                <a href="https://www.linkedin.com" target="_blank"><i class='bx bxl-linkedin'></i></a>
+                <a href="https://github.com" target="_blank"><i class='bx bxl-github'></i></a>
+                <a href="https://twitter.com" target="_blank"><i class='bx bxl-twitter'></i></a>
+                <a href="https://instagram.com" target="_blank"><i class='bx bxl-instagram'></i></a>
+            </div>
+
+            <!-- Nom corrigé (sans espace) -->
+            <a href="cv/cv-moderne.pdf" class="btn" download>Télécharger CV</a>
+        </div>
+
+        <div class="home-img">
+            <!-- Nom simple -->
+            <img src="image/Gemini_Generated_Image_vqui1lvqui1lvqui.png" alt="Photo de Souare">
+        </div>
+    </section>
+</main>
+
+<!-- JS pour menu + actif -->
+<script>
+    // Menu mobile
+    const menuIcon = document.getElementById("menu-icon");
+    const navbar = document.getElementById("navbar");
+
+    menuIcon.onclick = () => {
+        navbar.classList.toggle("active");
+    };
+
+    // Lien actif automatique
+    const links = document.querySelectorAll("#navbar a");
+
+    links.forEach(link => {
+        link.addEventListener("click", () => {
+            links.forEach(l => l.classList.remove("active"));
+            link.classList.add("active");
+        });
+    });
+
+    // Effet typing simple
+    const text = ["Développeur", "Designer", "Freelancer"];
+    let i = 0;
+    let j = 0;
+    let currentText = "";
+    let isDeleting = false;
+    const typingElement = document.getElementById("typing");
+
+    function type() {
+        currentText = text[i];
+
+        if (!isDeleting) {
+            typingElement.textContent = currentText.substring(0, j++);
+            if (j > currentText.length) {
+                isDeleting = true;
+                setTimeout(type, 1000);
+                return;
+            }
+        } else {
+            typingElement.textContent = currentText.substring(0, j--);
+            if (j === 0) {
+                isDeleting = false;
+                i = (i + 1) % text.length;
+            }
+        }
+
+        setTimeout(type, isDeleting ? 50 : 100);
+    }
+
+    type();
+</script>
+
+</body>
+</html>
